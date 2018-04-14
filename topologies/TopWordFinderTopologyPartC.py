@@ -15,6 +15,9 @@ class TopWordFinderTopologyPartC(Topology):
     # SplitSentenceBolt -> "split"
     # WordCountBolt -> "count"
     # NormalizerBolt -> "normalize"
-
+    spout = FileReaderSpout.spec(name="spout")
+    split = SplitSentenceBolt.spec(name="split", inputs=[spout])
+    normalize = NormalizerBolt.spec(name="normalize", inputs=[split])
+    count = WordCountBolt.spec(name="count", inputs={normalize: Grouping.fields("word")})
 
     # NOTE: will have to manually kill Topology after submission
