@@ -12,15 +12,18 @@ class FileReaderSpout(Spout):
 
         # TODO:
         # Task: Initialize the file reader
-
+        with open(datafile, 'r') as f:
 
     def next_tuple(self):
         # TODO:
         # Task 1: read the next line and emit a tuple for it
         # Task 2: don't forget to sleep for 1 second when the file is
         #         entirely read to prevent a busy-loop
-        # Task 3: use the "self.logger.info(...)" function to print 1. the message received and 2. the message emitted 
-
+        # Task 3: use the "self.logger.info(...)" function to print 1. the message received and 2. the message emitted
+        sleep(1)
+        sentence = f.next()
+        self.emit([sentence])
+        self.logger.info("- [pid={}] - Emitting: spout [{}]".format(self.pid,sentence))
         pass
 
     # NOTE: Streamparse does not have a close() function
