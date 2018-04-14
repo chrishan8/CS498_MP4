@@ -21,6 +21,6 @@ class TopWordFinderTopologyPartC(Topology):
     split = SplitSentenceBolt.spec(name="split", inputs=[spout])
     normalize = NormalizerBolt.spec(name="normalize", inputs=[split])
     count = WordCountBolt.spec(name="count", inputs={normalize: Grouping.fields("word")})
-    top-n = TopNFinderBolt.spec(name="top-n", inputs=[count])
+    topN = TopNFinderBolt.spec(name="top-n", inputs=[count])
 
     # NOTE: will have to manually kill Topology after submission
