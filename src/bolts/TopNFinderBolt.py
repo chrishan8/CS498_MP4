@@ -15,7 +15,9 @@ class TopNFinderBolt(Bolt):
     def process(self, tup):
         # TODO:
         # Task: keep track of the top N words
-        
+        word = tup.values[0]
+        self.logger.info("- [pid={}] - Processing received message [{}]".format(self.pid,word))
+        self.top_words[word] += 1
 
         # report the top N words periodically
         if time.time() - self.last_report >= self.interval:
