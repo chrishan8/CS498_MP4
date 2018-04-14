@@ -11,8 +11,8 @@ class TopWordFinderTopologyPartA(Topology):
     # RandomSentenceSpout -> "spout"
     # SplitSentenceBolt -> "split"
     # WordCountBolt -> "count"
-    spout = RandomSentenceSpout.spec()
-    split = SplitSentenceBolt.spec(inputs=[spout])
-    count = WordCountBolt.spec(inputs=[split])
+    spout = RandomSentenceSpout.spec(name="spout")
+    split = SplitSentenceBolt.spec(name="split", inputs=[spout])
+    count = WordCountBolt.spec(name="count", inputs=[split])
 
     # NOTE: will have to manually kill Topology after submission
